@@ -62,7 +62,7 @@
         </div>
         <h3 class="stat-title">8개 과목 교과우수상 달성</h3>
         <p class="stat-desc">
-          국·수·과·사·한국사·<strong>프로그래밍</strong>·<strong>정보</strong>·체육 교과우수상을 수상했습니다. 유일하게 2등급이었던 영어는 <strong>GitHub 오픈소스 영문 기술문서 독해</strong>로 정면 돌파하며 실무 공학 역량으로 확장했습니다.
+          국·수·과·사·한국사·<strong>프로그래밍</strong>·<strong>정보</strong>·체육 교과우수상을 수상했습니다. 유일하게 2등급이었던 영어는 <strong>GitHub 오픈소스 영문 기술문서 독해</strong>로 돌파하며 실무 공학 역량으로 확장했습니다.
         </p>
       </div>
 
@@ -73,7 +73,7 @@
           <span class="card-category">PHYSICAL AI & EMBEDDED</span>
         </div>
         <h3 class="bento-card-title">트랙 위 자율주행</h3>
-        <p class="card-subtext">TOF 다중 조건 조향 및 ABS 역추력 펌핑 알고리즘 구현</p>
+        <p class="card-subtext">다양한 센서(CDS, LiDAR, Line Tracer) 융합을 통한 하드웨어 제어 및 자율주행 알고리즘 구현</p>
         <div class="mini-award-tags">
           <span class="award-chip-mini">목원대 대회 (동상)</span>
           <span class="award-chip-mini">원주 모빌리티 대회 (특별상)</span>
@@ -185,7 +185,7 @@
               <span class="strength-num">03</span>
               <div>
                 <strong>동료와 패스를 주고받는 상호 성장</strong>
-                <p>혼자만의 성과에 매몰되지 않고 내가 잘하는 것은 친구에게 기꺼이 설명해주며 팀 전체의 성장을 돕습니다.</p>
+                <p>혼자만의 성과에 매몰되지 않고 내가 잘하는 것은 친구에게 기꺼이 설명해주며 공동체 전체의 성장을 돕습니다.</p>
               </div>
             </div>
           </div>
@@ -214,7 +214,17 @@
 
             <div class="skill-item">
               <div class="skill-info">
-                <span>C / C++ 임베디드 모빌리티 제어</span>
+                <span>Python과 C언어 코드를 작성 및 시스템 동작 구현</span>
+                <span class="skill-percent">70%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 70%;"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-info">
+                <span> 인식 센서의 특성 분석 및 정밀 튜닝 경험(LiDAR, Radar, 조도, 적외선)</span>
                 <span class="skill-percent">85%</span>
               </div>
               <div class="progress-bar">
@@ -224,7 +234,7 @@
 
             <div class="skill-item">
               <div class="skill-info">
-                <span>센서 튜닝 (TOF 다중 거리 · CDS 조도 · 라이다)</span>
+                <span>실전 코딩을 바탕으로 한 알고리즘 설계 및 분석·해결 능력</span>
                 <span class="skill-percent">80%</span>
               </div>
               <div class="progress-bar">
@@ -234,21 +244,11 @@
 
             <div class="skill-item">
               <div class="skill-info">
-                <span>알고리즘 문제 분석 및 실전 코딩</span>
-                <span class="skill-percent">75%</span>
-              </div>
-              <div class="progress-bar">
-                <div class="progress-fill" style="width: 75%;"></div>
-              </div>
-            </div>
-
-            <div class="skill-item">
-              <div class="skill-info">
                 <span>협업 및 깃허브 배포 (Git & GitHub Pages)</span>
-                <span class="skill-percent">70%</span>
+                <span class="skill-percent">60%</span>
               </div>
               <div class="progress-bar">
-                <div class="progress-fill" style="width: 70%;"></div>
+                <div class="progress-fill" style="width: 60%;"></div>
               </div>
             </div>
 
@@ -281,24 +281,56 @@
             <div class="flip-card-back">
               <h3>실전 트러블슈팅 & 알고리즘</h3>
               <ul>
-                <li><strong>역할:</strong> A선수 (출발 미션, CDS 터널 진입 및 멜로디 제어)</li>
-                <li><strong>해결 1:</strong> CDS 조도 센서값(<300)으로 터널 즉시 인식 및 LED 점멸</li>
-                <li><strong>해결 2:</strong> 350mm 급감속 시 비트 연산(`& 1`) ABS 역추력 펌핑 브레이크 구현</li>
+                <li><strong>역할:</strong> A선수 (출발 미션, CDS기반 LED 및 멜로디 제어)</li>
+                <li><strong>해결 1:</strong> CDS 조도 센서값(<300)으로 터널 즉시 인식 및 LED 점등</li>
+                <li><strong>해결 2:</strong> CDS 조도 센서값(<300)으로 터널 인식 후 노래 연주 및 B선수와 연결</li>
               </ul>
               <!-- 실제 사용한 소스코드 스니펫 -->
               <div class="code-snippet-box">
                 <span class="code-title">// 실제 대회에서 사용한 ABS 제동 알고리즘</span>
                 <code>
-void speed(int mm1, int mm2) {
-  if (sensor.TOF[2] >= mm1) { go(1000, 1000); brakeCounter = 0; }
-  else if (sensor.TOF[2] <= mm2) {
-    brakeCounter++;
-    if (brakeCounter <= 10) {
-      if (brakeCounter & 1) { go(-700, -700); } // 강력한 역추력
-      else { go(-350, -350); }                 // ABS 펌핑 감속
-    } else { go(450, 450); }                   // 탈출 속도
+while(1){
+    if(sensor.CDS<300)break;
+    Auto2(290, 500, -400);  // 기준 거리 290mm, 기본 코너 속도 500, 후진 속도 -400 세팅
+     delay(20); // 두 번째 코드의 장점: 제어 주기를 30ms로 단축하여 고속 주행 반응성 극대화
   }
-}
+  go(-600,-600);delay(100);go(0,0);
+     led(0x03FF); delay(500);
+     led(0x0000); delay(500);
+     led(0x03FF); delay(500);
+     led(0x0000);
+  
+  cnt=0;
+  cnt=millis();
+
+  while(1){
+    if(sensor.CDS<350 && millis()-cnt>2000)break;
+      Auto2(290, 500, -400);  // 기준 거리 290mm, 기본 코너 속도 500, 후진 속도 -400 세팅
+  }
+    go(-400,-400);delay(100);go(0,0);
+    sound(37); delay(200); // [1음표] 도(C4)
+    sound(39); delay(200); // [2음표] 레(D4)
+    sound(41); delay(200); // [3음표] 미(E4)
+    sound(41); delay(200); // [4음표] 미(E4)
+    
+    sound(37); delay(200); // [5음표] 도(C4)
+    sound(41); delay(200); // [6음표] 미(E4)
+    sound(44); delay(100); // [7음표] 솔(G4)
+    sound(46); delay(100); // [8음표] 라(A4)
+    sound(44); delay(200); // [9음표] 솔(G4)
+    
+    sound(37); delay(200); // [10음표] 도(C4)
+    sound(39); delay(200); // [11음표] 레(D4)
+    sound(41); delay(200); // [12음표] 미(E4)
+    sound(41); delay(200); // [13음표] 미(E4)
+    
+    sound(37); delay(200); // [14음표] 도(C4)
+    sound(41); delay(200); // [15음표] 미(E4)
+    sound(44); delay(100); // [16음표] 솔(G4)
+    sound(46); delay(100); // [17음표] 라(A4)
+    sound(44); delay(200); // [18음표] 솔(G4)
+    sound(0); // 부저 소리 끄기
+
                 </code>
               </div>
               <span class="click-hint">클릭해서 닫기 ↺</span>
@@ -311,7 +343,7 @@ void speed(int mm1, int mm2) {
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <div class="card-tag">모빌리티 챌린지 · 특별상</div>
-              <img src="images/project_hl_fma.png" alt="알티노 AI 원주 대회" class="card-img" onerror="this.src='https://via.placeholder.com/300x155?text=Altino+AI+Special+Award';" />
+              <img src="images/project_hl_fma.jpg" alt="알티노 AI 원주 대회" class="card-img" onerror="this.src='https://via.placeholder.com/300x155?text=Altino+AI+Special+Award';" />
               <h3>알티노 AI 라이다 차선인식 주행</h3>
               <p>알티노 AI를 활용해 라이다 기반 차선 인식 주행 및 돌발 변수 극복</p>
               <span class="click-hint">클릭해서 위기 극복 과정 보기 ↻</span>
