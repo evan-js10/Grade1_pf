@@ -43,9 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "학업 성실도",
         "대외 소통·홍보",
         "전공 리더십",
-        "체력·원팀 정신",
+        "체력·팀플레이",
         "실전 공학 감각",
-        "호기심·도전정신"
+        "호기심·배움"
       ],
       datasets: [
         {
@@ -113,4 +113,122 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+});
+
+// 상장 이미지 팝업 열기 함수
+function openImageModal(imageSrc, captionText) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImg');
+  const modalCaption = document.getElementById('modalCaption');
+
+  modalImg.src = imageSrc;
+  modalCaption.textContent = captionText;
+
+  // 모달 표시 및 부드러운 페이드인
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  setTimeout(() => {
+    modal.classList.remove('opacity-0');
+  }, 10);
+
+  // 모달이 열려있는 동안 뒷배경 스크롤 방지
+  document.body.style.overflow = 'hidden';
+}
+
+// 상장 이미지 팝업 닫기 함수
+function closeImageModal() {
+  const modal = document.getElementById('imageModal');
+  modal.classList.add('opacity-0');
+
+  setTimeout(() => {
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+    document.getElementById('modalImg').src = '';
+  }, 300);
+
+  // 뒷배경 스크롤 복원
+  document.body.style.overflow = 'auto';
+}
+
+// 모달 바깥 어두운 배경 클릭 시 닫기
+document.getElementById('imageModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeImageModal();
+  }
+});
+
+// 키보드 ESC 키 누르면 모달 닫기
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('imageModal');
+    if (!modal.classList.contains('hidden')) {
+      closeImageModal();
+    }
+  }
+});
+
+// ==========================================================================
+// Timeline Scroll Fade-In Interaction ver_up_26.11.06
+// ==========================================================================
+document.addEventListener("DOMContentLoaded", function () {
+  const timelineItems = document.querySelectorAll(".timeline-item");
+  if (!timelineItems.length) return;
+
+  timelineItems.forEach((item) => {
+    item.style.opacity = "0";
+    item.style.transform = "translateY(20px)";
+    item.style.transition = "opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
+  });
+
+  const timelineObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  timelineItems.forEach((item) => timelineObserver.observe(item));
+});
+
+
+// ==========================================================================
+// Contact Email Click-to-Copy Interaction ver_up_26.11.06
+// ==========================================================================
+document.addEventListener("DOMContentLoaded", function () {
+  const copyButtons = document.querySelectorAll(".copy-btn");
+  const toast = document.getElementById("copyToast");
+
+  if (!copyButtons.length || !toast) return;
+
+  copyButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const textToCopy = btn.getAttribute("data-copy");
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy).then(showToast);
+      } else {
+        // Fallback for older browsers or non-HTTPS
+        const tempInput = document.createElement("input");
+        tempInput.value = textToCopy;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        showToast();
+      }
+    });
+  });
+
+  function showToast() {
+    toast.classList.add("show");
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2400);
+  }
 });

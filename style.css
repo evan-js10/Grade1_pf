@@ -70,7 +70,7 @@ body {
 }
 
 /* ==========================================================================
-   Navigation Bar (Sticky Glassmorphism)
+   Navigation Bar (Sticky Glassmorphism & Mobile Optimized)
    ========================================================================== */
 
 .navbar {
@@ -101,12 +101,20 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.75rem;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  white-space: nowrap;
 }
 
 .nav-links a {
@@ -115,6 +123,7 @@ body {
   font-size: 0.9rem;
   font-weight: 500;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -134,7 +143,8 @@ body {
 section#awards,
 section#skills,
 section#activities,
-section#about {
+section#about,
+section#contact {
   background-color: transparent !important;
 }
 
@@ -480,6 +490,34 @@ section#about {
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
+/* 언론 & 미디어 하단 리스트를 1~3번 카드와 동일한 박스형 블록으로 맞춤 */
+.card-media .media-proof-list {
+  margin-top: auto;              /* 하단 바닥 라인 자동 정렬 */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                     /* 두 박스 사이 간격 (1~3번과 동일) */
+}
+
+.card-media .media-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.7);            /* 1, 3번과 동일한 어두운 배경 */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* 은은한 외곽선으로 박스감 부여 */
+  border-radius: 8px;                           /* 모서리 곡률 통일 */
+  box-sizing: border-box;
+}
+
+.card-media .media-text {
+  font-size: 12.5px;
+  color: #e2e8f0;
+  white-space: nowrap;          /* 줄바꿈 없이 깔끔하게 한 줄 유지 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 /* ==========================================================================
    2. About & Skills Section (2-Column & Progress Bars)
    ========================================================================== */
@@ -654,7 +692,7 @@ section#about {
   border: 1px solid rgba(168, 85, 247, 0.25);
 }
 
-/* 스킬 프로그레스 바 (Savinpark 스타일) */
+/* 스킬 프로그레스 바 */
 .skills-progress-group {
   display: flex;
   flex-direction: column;
@@ -849,6 +887,42 @@ section#about {
   color: #60a5fa;
   text-align: right;
   font-weight: 600;
+}
+
+/* 뒷면 유튜브 영상 링크 버튼 */
+.yt-video-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  margin: 10px 0 6px 0;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 6px;
+  color: #f87171;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.yt-video-link-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.yt-play-icon {
+  font-size: 10px;
+  color: #ef4444;
+}
+
+.yt-video-link-btn:hover .yt-play-icon {
+  color: #ffffff;
 }
 
 /* ==========================================================================
@@ -1048,93 +1122,6 @@ section#about {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
-   ========================================================================== */
-
-/* 태블릿 (1024px 이하) */
-@media (max-width: 1024px) {
-  .card-identity { grid-column: span 12; grid-row: auto; }
-  .card-academic { grid-column: span 12; grid-row: auto; }
-  .card-engineering,
-  .card-leadership,
-  .card-athletic,
-  .card-media { grid-column: span 6; }
-
-  .about-main-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-}
-
-/* 모바일 (768px 이하) */
-@media (max-width: 768px) {
-  .nav-links {
-    gap: 1rem;
-    font-size: 0.8rem;
-  }
-
-  .bento-hero-section {
-    padding: 2.5rem 1rem 3.5rem;
-  }
-
-  .stats-counter-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .flip-card {
-    height: 440px;
-  }
-
-  .timeline {
-    padding-left: 1.5rem;
-  }
-
-  .timeline-dot {
-    left: -1.95rem;
-  }
-}
-
-/* 초소형 모바일 (640px 이하) */
-@media (max-width: 640px) {
-  .bento-container {
-    grid-template-columns: 1fr;
-  }
-
-  .card-identity,
-  .card-academic,
-  .card-engineering,
-  .card-leadership,
-  .card-athletic,
-  .card-media {
-    grid-column: span 1;
-  }
-
-  .card-identity {
-    padding: 2rem 1.5rem;
-  }
-}
-
-/* 영문 공학 어휘 태그 스타일 */
-.vocab-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-top: 0.35rem;
-}
-
-.vocab-badge {
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: #38bdf8;
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  font-family: ui-monospace, monospace;
-}
-
-/* ==========================================================================
    All-Rounder Hexagon Radar Chart Section
    ========================================================================== */
 
@@ -1237,7 +1224,336 @@ section#about {
   margin: 0;
 }
 
-/* 모바일 반응형 처리 */
+/* 영문 공학 어휘 태그 스타일 */
+.vocab-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.vocab-badge {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+}
+
+/* ==========================================================================
+   타임라인 리스트 & 배지 상세 스타일
+   ========================================================================== */
+
+/* 영문 서브 카테고리 태그 */
+.timeline-cat-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  margin-left: 0.4rem;
+  letter-spacing: 0;
+  opacity: 0.85;
+}
+
+/* 타임라인 본문 리스트 */
+.timeline-desc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.timeline-desc-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* 역할 및 성과 구분 배지 */
+.role-badge {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.role-badge.activity {
+  background: rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.role-badge.tech {
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.role-badge.leadership {
+  background: rgba(168, 85, 247, 0.15);
+  color: #d8b4fe;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.role-badge.award {
+  background: rgba(37, 99, 235, 0.22);
+  color: #93c5fd;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+}
+
+.role-badge.challenge {
+  background: rgba(249, 115, 22, 0.2);
+  color: #fdba74;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+}
+
+/* 수상 내역 강조 텍스트 */
+.award-highlight strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 11월 (예정) 오렌지/앰버 하이라이트 */
+.timeline-dot.dot-orange {
+  background-color: #f97316;
+  box-shadow: 0 0 10px #f97316;
+}
+
+.timeline-date.date-orange {
+  color: #fb923c;
+}
+
+.timeline-cat-badge.badge-orange {
+  color: #fdba74;
+}
+
+.content-future {
+  background: rgba(249, 115, 22, 0.04);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+}
+
+.orange-text strong {
+  color: #ffedd5;
+}
+
+/* ==========================================================================
+   Contact Section (함께 이야기해요)
+   ========================================================================== */
+
+.contact-section {
+  padding: 5rem 0 6rem;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-card {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 28px;
+  padding: 3.2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 30px -10px rgba(14, 165, 233, 0.15);
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-card:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-3px);
+}
+
+/* 카드 상단 은은한 오로라 글로우 */
+.contact-glow-bg {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(56, 189, 248, 0.2) 60%, transparent 100%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-header {
+  position: relative;
+  z-index: 1;
+}
+
+/* 말풍선 아이콘 뱃지 */
+.contact-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(56, 189, 248, 0.25));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  margin-bottom: 1.1rem;
+}
+
+.contact-title {
+  font-size: clamp(1.7rem, 3.2vw, 2.1rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.8rem;
+}
+
+/* 감각적인 포인트 구분선 */
+.contact-divider {
+  width: 44px;
+  height: 3px;
+  background: linear-gradient(90deg, #10b981, #38bdf8);
+  border-radius: 999px;
+  margin: 0 auto 1.3rem;
+}
+
+.contact-desc {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  line-height: 1.65;
+  margin-bottom: 2.2rem;
+  word-break: keep-all;
+}
+
+/* 버튼 그룹 */
+.contact-btn-group {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* 연락처 링크 & 복사 버튼 공통 */
+.contact-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.95rem 1.4rem;
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-sizing: border-box;
+}
+
+.contact-link-btn:hover {
+  background: rgba(51, 65, 85, 0.7);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+  color: #ffffff;
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.4);
+}
+
+.contact-link-btn .btn-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.6rem;
+  color: #38bdf8;
+}
+
+.contact-link-btn .btn-text {
+  flex-grow: 1;
+  text-align: left;
+  letter-spacing: -0.01em;
+}
+
+.copy-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.link-arrow {
+  color: #64748b;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.contact-link-btn:hover .link-arrow {
+  transform: translate(2px, -2px);
+  color: #38bdf8;
+}
+
+/* 복사 완료 토스트 알림 */
+.copy-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: rgba(15, 23, 42, 0.95);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10000;
+}
+
+.copy-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (반응형 최적화)
+   ========================================================================== */
+
+/* 태블릿 (1024px 이하) */
+@media (max-width: 1024px) {
+  .card-identity { grid-column: span 12; grid-row: auto; }
+  .card-academic { grid-column: span 12; grid-row: auto; }
+  .card-engineering,
+  .card-leadership,
+  .card-athletic,
+  .card-media { grid-column: span 6; }
+
+  .about-main-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* 중형 모바일 / 태블릿 세로 (900px 이하) */
 @media (max-width: 900px) {
   .hexagon-content-grid {
     grid-template-columns: 1fr;
@@ -1245,5 +1561,100 @@ section#about {
   }
   .hexagon-profile-card {
     padding: 1.75rem 1.25rem;
+  }
+}
+
+/* 스마트폰 기본 (768px 이하) */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0.85rem 1rem;
+  }
+
+  /* 모바일에서 로고 슬로건(| All-Rounder) 숨김 처리하여 5개 메뉴 공간 확보 */
+  .logo span {
+    display: none;
+  }
+
+  .nav-links {
+    gap: 0.85rem;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+  }
+
+  .bento-hero-section {
+    padding: 2.5rem 1rem 3.5rem;
+  }
+
+  .stats-counter-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .flip-card {
+    height: 440px;
+  }
+
+  .timeline {
+    padding-left: 1.5rem;
+  }
+
+  .timeline-dot {
+    left: -1.95rem;
+  }
+}
+
+/* 소형 모바일 (640px 이하) */
+@media (max-width: 640px) {
+  .bento-container {
+    grid-template-columns: 1fr;
+  }
+
+  .card-identity,
+  .card-academic,
+  .card-engineering,
+  .card-leadership,
+  .card-athletic,
+  .card-media {
+    grid-column: span 1;
+  }
+
+  .card-identity {
+    padding: 2rem 1.5rem;
+  }
+
+  .timeline-desc-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .contact-card {
+    padding: 2.2rem 1.4rem;
+  }
+
+  .contact-link-btn {
+    padding: 0.85rem 1.1rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* 초소형 모바일 기기 (400px 이하 - 아이폰 SE 등) */
+@media (max-width: 400px) {
+  .nav-container {
+    padding: 0.75rem 0.65rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    gap: 0.55rem;
+  }
+
+  .nav-links a {
+    font-size: 0.76rem;
   }
 }
